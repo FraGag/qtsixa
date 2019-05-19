@@ -4,8 +4,8 @@
 
 # Imports
 import os, shared
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QDialog, QIcon, QMessageBox
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QDialog, QMessageBox
 import ui_qtsixa_newprofilew
 
 
@@ -18,10 +18,10 @@ class NewProfileW(QDialog, ui_qtsixa_newprofilew.Ui_NewProfileW):
         self.dockWidget.setVisible(False)
         self.dockWidget.setFloating(True)
 
-        self.connect(self.b_tips, SIGNAL('clicked()'), self.func_Tips)
-        self.connect(self.b_done, SIGNAL('clicked()'), self.func_Done)
-        self.connect(self.combo_left, SIGNAL('currentIndexChanged(QString)'), self.func_UpdateComboLeft)
-        self.connect(self.combo_right, SIGNAL('currentIndexChanged(QString)'), self.func_UpdateComboRight)
+        self.b_tips.clicked.connect(self.func_Tips)
+        self.b_done.clicked.connect(self.func_Done)
+        self.combo_left.currentIndexChanged[str].connect(self.func_UpdateComboLeft)
+        self.combo_right.currentIndexChanged[str].connect(self.func_UpdateComboRight)
 
         self.group_left_h.setEnabled(0)
         self.group_left_v.setEnabled(0)

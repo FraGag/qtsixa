@@ -5,8 +5,8 @@
 # Imports
 import os
 from commands import getoutput
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QWizard, QIcon, QPixmap
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtWidgets import QWizard
 import ui_qtsixa_newdevw, shared
 
 
@@ -16,9 +16,9 @@ class NewDevW(QWizard, ui_qtsixa_newdevw.Ui_NewDevW):
         self.setupUi(self)
         self.setWindowIcon(QIcon(":/icons/qtsixa.png"))
 
-        self.connect(self.co_input, SIGNAL('currentIndexChanged(QString)'), self.func_UpdatePreview)
-        self.connect(self, SIGNAL('accepted()'), self.func_Done)
-        self.connect(self, SIGNAL('currentIdChanged(int)'), self.func_ChangedPage)
+        self.co_input.currentIndexChanged[str].connect(self.func_UpdatePreview)
+        self.accepted.connect(self.func_Done)
+        self.currentIdChanged.connect(self.func_ChangedPage)
 
         self.l_preview.setPixmap(QPixmap("/usr/share/qtsixa/pics/(None).png"))
         self.lastpage = -1

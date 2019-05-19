@@ -5,8 +5,8 @@
 # Imports
 import os, sys
 from commands import getoutput
-from PyQt4.QtCore import QT_VERSION_STR, PYQT_VERSION_STR
-from PyQt4.QtGui import QApplication, QMessageBox
+from PyQt5.QtCore import QT_VERSION_STR, PYQT_VERSION_STR
+from PyQt5.QtWidgets import QApplication, QMessageBox
 
 import shared, qtsixa_main, qtsixa_manage
 

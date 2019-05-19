@@ -3,7 +3,8 @@
 
 
 # Imports
-from PyQt4.QtGui import QDialog, QIcon
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QDialog
 import ui_qtsixa_referencew
 
 

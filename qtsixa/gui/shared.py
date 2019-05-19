@@ -4,8 +4,8 @@
 
 # Imports
 import os
-from PyQt4.QtCore import QFile, QIODevice, QTextStream
-from PyQt4.QtXml import QDomDocument
+from PyQt5.QtCore import QFile, QIODevice, QTextStream
+from PyQt5.QtXml import QDomDocument
 
 
 class Globals(object):

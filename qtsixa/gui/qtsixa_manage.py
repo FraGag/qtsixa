@@ -4,8 +4,8 @@
 
 # Imports
 import os, shared
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QDialog, QIcon, QTableWidgetItem
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QDialog, QTableWidgetItem
 import ui_qtsixa_managew, qtsixa_newdev, qtsixa_newprofile
 
 
@@ -20,13 +20,13 @@ class ManageW(QDialog, ui_qtsixa_managew.Ui_ManageW):
 
         self.listDev.setColumnWidth(0, 150)
 
-        self.connect(self.listDev, SIGNAL('itemSelectionChanged()'), self.func_changedListDev)
-        self.connect(self.listProf, SIGNAL('currentRowChanged(int)'), self.func_changedListProf)
-        self.connect(self.tabWidget, SIGNAL('currentChanged(int)'), self.func_changedTab)
+        self.listDev.itemSelectionChanged.connect(self.func_changedListDev)
+        self.listProf.currentRowChanged.connect(self.func_changedListProf)
+        self.tabWidget.currentChanged.connect(self.func_changedTab)
 
-        self.connect(self.b_add, SIGNAL('clicked()'), self.func_Add)
-        self.connect(self.b_remove, SIGNAL('clicked()'), self.func_Remove)
-        self.connect(self.b_edit, SIGNAL('clicked()'), self.func_Edit)
+        self.b_add.clicked.connect(self.func_Add)
+        self.b_remove.clicked.connect(self.func_Remove)
+        self.b_edit.clicked.connect(self.func_Edit)
 
         if not os.path.exists(os.getenv("HOME")+"/.qtsixa2/profiles/"):
           os.mkdir(os.getenv("HOME")+"/.qtsixa2/profiles/")
