@@ -6,8 +6,9 @@
 import dbus, os, sys
 from commands import getoutput
 from functools import partial
-from PyQt4.QtCore import QFile, QTimer, SIGNAL
-from PyQt4.QtGui import QAction, QCursor, QIcon, QMainWindow, QMenu, QMessageBox, QSystemTrayIcon, QWizard
+from PyQt5.QtCore import QFile, QTimer
+from PyQt5.QtGui import QCursor, QIcon
+from PyQt5.QtWidgets import QAction, QMainWindow, QMenu, QMessageBox, QSystemTrayIcon, QWizard
 
 import shared, qtsixa_about, qtsixa_manage, qtsixa_newdev, qtsixa_preferences, qtsixa_reference
 import ui_qtsixa_mainw, ui_qtsixa_sixpairw
@@ -46,7 +47,7 @@ class SixpairW(QWizard, ui_qtsixa_sixpairw.Ui_SixpairW):
         QWizard.__init__(self, *args)
         self.setupUi(self)
         self.setWindowIcon(QIcon(":/icons/qtsixa.png"))
-        self.connect(self, SIGNAL("currentIdChanged(int)"), self.changedPage)
+        self.currentIdChanged.connect(self.changedPage)
 
     def changedPage(self, pageN):
         if (pageN == 1):
@@ -75,68 +76,68 @@ class MainW(QMainWindow, ui_qtsixa_mainw.Ui_QtSixAMainW):
 
         if (shared.Globals.show_warnings): func_Check_BTs(self)
 
-        self.connect(self.b_disconnect, SIGNAL('clicked()'), self.func_Disconnect)
-        self.connect(self.b_disconnect_all, SIGNAL('clicked()'), self.func_DiscEverything)
-        self.connect(self.b_battery, SIGNAL('clicked()'), self.func_Battery)
-        self.connect(self.b_rumble, SIGNAL('clicked()'), self.func_Rumble)
-        self.connect(self.act_DiscSixaxis, SIGNAL('triggered()'), self.func_DiscAllSixaxis)
-        self.connect(self.act_DiscDevices, SIGNAL('triggered()'), self.func_DiscEverything)
-        self.connect(self.act_1, SIGNAL("triggered()"), partial(self.func_DiscSelected, 1))
-        self.connect(self.act_2, SIGNAL("triggered()"), partial(self.func_DiscSelected, 2))
-        self.connect(self.act_3, SIGNAL("triggered()"), partial(self.func_DiscSelected, 3))
-        self.connect(self.act_4, SIGNAL("triggered()"), partial(self.func_DiscSelected, 4))
-        self.connect(self.act_5, SIGNAL("triggered()"), partial(self.func_DiscSelected, 5))
-        self.connect(self.act_6, SIGNAL("triggered()"), partial(self.func_DiscSelected, 6))
-        self.connect(self.act_7, SIGNAL("triggered()"), partial(self.func_DiscSelected, 7))
-        self.connect(self.act_8, SIGNAL("triggered()"), partial(self.func_DiscSelected, 8))
-        self.connect(self.act_bt_start, SIGNAL('triggered()'), self.func_BT_Start)
-        self.connect(self.act_bt_stop, SIGNAL('triggered()'), self.func_BT_Stop)
-        self.connect(self.act_Pair, SIGNAL('triggered()'), self.func_Sixpair)
-        self.connect(self.act_sixad_force, SIGNAL('triggered()'), self.func_sixad_Force)
-        self.connect(self.act_sixad_stop, SIGNAL('triggered()'), self.func_sixad_Stop)
+        self.b_disconnect.clicked.connect(self.func_Disconnect)
+        self.b_disconnect_all.clicked.connect(self.func_DiscEverything)
+        self.b_battery.clicked.connect(self.func_Battery)
+        self.b_rumble.clicked.connect(self.func_Rumble)
+        self.act_DiscSixaxis.triggered.connect(self.func_DiscAllSixaxis)
+        self.act_DiscDevices.triggered.connect(self.func_DiscEverything)
+        self.act_1.triggered.connect(partial(self.func_DiscSelected, 1))
+        self.act_2.triggered.connect(partial(self.func_DiscSelected, 2))
+        self.act_3.triggered.connect(partial(self.func_DiscSelected, 3))
+        self.act_4.triggered.connect(partial(self.func_DiscSelected, 4))
+        self.act_5.triggered.connect(partial(self.func_DiscSelected, 5))
+        self.act_6.triggered.connect(partial(self.func_DiscSelected, 6))
+        self.act_7.triggered.connect(partial(self.func_DiscSelected, 7))
+        self.act_8.triggered.connect(partial(self.func_DiscSelected, 8))
+        self.act_bt_start.triggered.connect(self.func_BT_Start)
+        self.act_bt_stop.triggered.connect(self.func_BT_Stop)
+        self.act_Pair.triggered.connect(self.func_Sixpair)
+        self.act_sixad_force.triggered.connect(self.func_sixad_Force)
+        self.act_sixad_stop.triggered.connect(self.func_sixad_Stop)
 
-        self.connect(self.act_ManageProf, SIGNAL('triggered()'), self.func_Manage)
-        self.connect(self.act_Configure, SIGNAL('triggered()'), self.func_Preferences)
-        self.connect(self.act_Debug, SIGNAL('triggered()'), self.func_Debug)
-        self.connect(self.act_RestoreDef, SIGNAL('triggered()'), self.func_RestoreDef)
+        self.act_ManageProf.triggered.connect(self.func_Manage)
+        self.act_Configure.triggered.connect(self.func_Preferences)
+        self.act_Debug.triggered.connect(self.func_Debug)
+        self.act_RestoreDef.triggered.connect(self.func_RestoreDef)
 
-        self.connect(self.act_Manual, SIGNAL('triggered()'), self.func_Manual)
-        self.connect(self.act_WebPage, SIGNAL('triggered()'), self.func_WebPage)
-        self.connect(self.act_Ubuntu, SIGNAL('triggered()'), self.func_UbuntuForums)
-        self.connect(self.act_Bug, SIGNAL('triggered()'), self.func_Report_Bug)
-        self.connect(self.act_Donate, SIGNAL('triggered()'), self.func_Donate)
-        self.connect(self.act_Reference, SIGNAL('triggered()'), self.func_Reference)
-        self.connect(self.act_About, SIGNAL('triggered()'), self.func_About)
+        self.act_Manual.triggered.connect(self.func_Manual)
+        self.act_WebPage.triggered.connect(self.func_WebPage)
+        self.act_Ubuntu.triggered.connect(self.func_UbuntuForums)
+        self.act_Bug.triggered.connect(self.func_Report_Bug)
+        self.act_Donate.triggered.connect(self.func_Donate)
+        self.act_Reference.triggered.connect(self.func_Reference)
+        self.act_About.triggered.connect(self.func_About)
 
-        self.connect(self.b_game_help, SIGNAL("clicked()"), self.func_HelpGame)
-        self.connect(self.b_game_apply, SIGNAL("clicked()"), self.func_ApplyGame)
-        self.connect(self.b_apply_signal, SIGNAL("clicked()"), self.func_Apply_signal)
-        #self.connect(self.b_apply_hidraw, SIGNAL("clicked()"), self.func_Apply_hidraw)
-        self.connect(self.b_refresh_signal, SIGNAL("clicked()"), self.func_Refresh_signal)
-        self.connect(self.b_refresh_hidraw, SIGNAL("clicked()"), self.func_Refresh_hidraw)
-        self.connect(self.b_reset_signal, SIGNAL("clicked()"), self.func_Reset_signal)
-        self.connect(self.b_tips_signal, SIGNAL("clicked()"), self.func_Tips_signal)
-        self.connect(self.b_stop_sixadraw, SIGNAL("clicked()"), self.func_Kill_sixadraw)
+        self.b_game_help.clicked.connect(self.func_HelpGame)
+        self.b_game_apply.clicked.connect(self.func_ApplyGame)
+        self.b_apply_signal.clicked.connect(self.func_Apply_signal)
+        #self.b_apply_hidraw.clicked.connect(self.func_Apply_hidraw)
+        self.b_refresh_signal.clicked.connect(self.func_Refresh_signal)
+        self.b_refresh_hidraw.clicked.connect(self.func_Refresh_hidraw)
+        self.b_reset_signal.clicked.connect(self.func_Reset_signal)
+        self.b_tips_signal.clicked.connect(self.func_Tips_signal)
+        self.b_stop_sixadraw.clicked.connect(self.func_Kill_sixadraw)
 
-        self.connect(self.autoListRefresh, SIGNAL('timeout()'), self.func_UpdateListOfDevices)
-        self.connect(self.autoLQRefresh, SIGNAL('timeout()'), self.func_UpdateDeviceLQ)
-        self.connect(self.listOfDevices, SIGNAL('currentRowChanged(int)'), self.func_UpdateDeviceStats)
-        self.connect(self.listOfDevices, SIGNAL('customContextMenuRequested(QPoint)'), self.func_ProfileMenu)
-        self.connect(self.listOfGames, SIGNAL('currentIndexChanged(int)'), self.func_UpdateGames)
-        self.connect(self.listOfGames, SIGNAL('currentIndexChanged(int)'), self.func_Game_bOff)
+        self.autoListRefresh.timeout.connect(self.func_UpdateListOfDevices)
+        self.autoLQRefresh.timeout.connect(self.func_UpdateDeviceLQ)
+        self.listOfDevices.currentRowChanged.connect(self.func_UpdateDeviceStats)
+        self.listOfDevices.customContextMenuRequested.connect(self.func_ProfileMenu)
+        self.listOfGames.currentIndexChanged.connect(self.func_UpdateGames)
+        self.listOfGames.currentIndexChanged.connect(self.func_Game_bOff)
 
-        self.connect(self.radio_etracer_axis, SIGNAL("clicked()"), self.func_Game_bOn)
-        self.connect(self.radio_etracer_accel, SIGNAL("clicked()"), self.func_Game_bOn)
-        self.connect(self.radio_etracer_full, SIGNAL("clicked()"), self.func_Game_bOn)
-        self.connect(self.radio_stk_digital, SIGNAL("clicked()"), self.func_Game_bOn)
-        self.connect(self.radio_stk_axis, SIGNAL("clicked()"), self.func_Game_bOn)
-        self.connect(self.radio_stk_accel, SIGNAL("clicked()"), self.func_Game_bOn)
-        self.connect(self.radio_stk_full, SIGNAL("clicked()"), self.func_Game_bOn)
-        self.connect(self.radio_neverball_axis, SIGNAL("clicked()"), self.func_Game_bOn)
-        self.connect(self.radio_neverball_accel, SIGNAL("clicked()"), self.func_Game_bOn)
-        self.connect(self.radio_game_epsxe_1, SIGNAL("clicked()"), self.func_Game_bOn)
-        self.connect(self.radio_game_epsxe_axis, SIGNAL("clicked()"), self.func_Game_bOn)
-        self.connect(self.radio_game_epsxe_drv, SIGNAL("clicked()"), self.func_Game_bOn)
+        self.radio_etracer_axis.clicked.connect(self.func_Game_bOn)
+        self.radio_etracer_accel.clicked.connect(self.func_Game_bOn)
+        self.radio_etracer_full.clicked.connect(self.func_Game_bOn)
+        self.radio_stk_digital.clicked.connect(self.func_Game_bOn)
+        self.radio_stk_axis.clicked.connect(self.func_Game_bOn)
+        self.radio_stk_accel.clicked.connect(self.func_Game_bOn)
+        self.radio_stk_full.clicked.connect(self.func_Game_bOn)
+        self.radio_neverball_axis.clicked.connect(self.func_Game_bOn)
+        self.radio_neverball_accel.clicked.connect(self.func_Game_bOn)
+        self.radio_game_epsxe_1.clicked.connect(self.func_Game_bOn)
+        self.radio_game_epsxe_axis.clicked.connect(self.func_Game_bOn)
+        self.radio_game_epsxe_drv.clicked.connect(self.func_Game_bOn)
 
         self.hidd_number_1 = ""
         self.hidd_number_2 = ""
@@ -859,9 +860,9 @@ class MainW(QMainWindow, ui_qtsixa_mainw.Ui_QtSixAMainW):
 #Systray Stuff  ### ------------------------------------------------------------------------------------------
     def createTrayIcon(self):
         self.actionShowSixA = QAction(self.tr("Show/Hide Main &Window"), self)
-        self.connect(self.actionShowSixA, SIGNAL("triggered()"), self.func_Show_SixA)
+        self.actionShowSixA.triggered.connect(self.func_Show_SixA)
         self.actionCloseSystray = QAction(QIcon('/usr/share/qtsixa/icons/close.png'), self.tr("&Close Systray"), self)
-        self.connect(self.actionCloseSystray, SIGNAL("triggered()"), self.func_CloseSystray)
+        self.actionCloseSystray.triggered.connect(self.func_CloseSystray)
 
         self.trayIconMenu = QMenu(self)
         self.trayIconMenu.addAction(self.act_About)

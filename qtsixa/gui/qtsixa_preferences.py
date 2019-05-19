@@ -4,8 +4,9 @@
 
 # Imports
 import os
-from PyQt4.QtCore import QFile, QIODevice, QTextStream, SIGNAL
-from PyQt4.QtGui import QDialog, QDialogButtonBox, QIcon, QMessageBox
+from PyQt5.QtCore import QFile, QIODevice, QTextStream
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QMessageBox
 import shared, ui_qtsixa_preferencesw
 
 
@@ -46,16 +47,16 @@ class PreferencesW(QDialog, ui_qtsixa_preferencesw.Ui_PreferencesW):
             self.box_startup.setChecked(False)
 
 
-        self.connect(self.box_startup, SIGNAL('clicked()'), self.func_Apply_Enable)
-        self.connect(self.box_warn, SIGNAL('clicked()'), self.func_Apply_Enable)
-        self.connect(self.box_1inst, SIGNAL('clicked()'), self.func_Apply_Enable)
-        self.connect(self.box_systray, SIGNAL('clicked()'), self.func_Apply_Enable)
-        self.connect(self.box_min, SIGNAL('clicked()'), self.func_Apply_Enable)
-        self.connect(self.box_close, SIGNAL('clicked()'), self.func_Apply_Enable)
-        self.connect(self.box_notify, SIGNAL("clicked()"), self.func_Apply_Enable)
-        self.connect(self.box_notify_start, SIGNAL("clicked()"), self.func_Apply_Enable)
-        self.connect(self.buttonBox, SIGNAL("accepted()"), self.func_Apply)
-        self.connect(self.buttonBox.button(QDialogButtonBox.Apply), SIGNAL("clicked()"), self.func_Apply)
+        self.box_startup.clicked.connect(self.func_Apply_Enable)
+        self.box_warn.clicked.connect(self.func_Apply_Enable)
+        self.box_1inst.clicked.connect(self.func_Apply_Enable)
+        self.box_systray.clicked.connect(self.func_Apply_Enable)
+        self.box_min.clicked.connect(self.func_Apply_Enable)
+        self.box_close.clicked.connect(self.func_Apply_Enable)
+        self.box_notify.clicked.connect(self.func_Apply_Enable)
+        self.box_notify_start.clicked.connect(self.func_Apply_Enable)
+        self.buttonBox.accepted.connect(self.func_Apply)
+        self.buttonBox.button(QDialogButtonBox.Apply).clicked.connect(self.func_Apply)
 
 
     def func_Apply_Enable(self):

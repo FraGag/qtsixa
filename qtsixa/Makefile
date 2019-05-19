@@ -4,15 +4,15 @@ DESTDIR =
 
 
 build:
-	pyuic4 -o ./gui/ui_qtsixa_mainw.py ./gui/ui/qtsixa_mainw.ui
-	pyuic4 -o ./gui/ui_qtsixa_aboutw.py ./gui/ui/qtsixa_aboutw.ui
-	pyuic4 -o ./gui/ui_qtsixa_managew.py ./gui/ui/qtsixa_managew.ui
-	pyuic4 -o ./gui/ui_qtsixa_newdevw.py ./gui/ui/qtsixa_newdevw.ui
-	pyuic4 -o ./gui/ui_qtsixa_newprofilew.py ./gui/ui/qtsixa_newprofilew.ui
-	pyuic4 -o ./gui/ui_qtsixa_preferencesw.py ./gui/ui/qtsixa_preferencesw.ui
-	pyuic4 -o ./gui/ui_qtsixa_referencew.py ./gui/ui/qtsixa_referencew.ui
-	pyuic4 -o ./gui/ui_qtsixa_sixpairw.py ./gui/ui/qtsixa_sixpairw.ui
-	pyrcc4 -o ./gui/qtsixa_rc.py ./icons/qtsixa.qrc
+	pyuic5 -o ./gui/ui_qtsixa_mainw.py ./gui/ui/qtsixa_mainw.ui
+	pyuic5 -o ./gui/ui_qtsixa_aboutw.py ./gui/ui/qtsixa_aboutw.ui
+	pyuic5 -o ./gui/ui_qtsixa_managew.py ./gui/ui/qtsixa_managew.ui
+	pyuic5 -o ./gui/ui_qtsixa_newdevw.py ./gui/ui/qtsixa_newdevw.ui
+	pyuic5 -o ./gui/ui_qtsixa_newprofilew.py ./gui/ui/qtsixa_newprofilew.ui
+	pyuic5 -o ./gui/ui_qtsixa_preferencesw.py ./gui/ui/qtsixa_preferencesw.ui
+	pyuic5 -o ./gui/ui_qtsixa_referencew.py ./gui/ui/qtsixa_referencew.ui
+	pyuic5 -o ./gui/ui_qtsixa_sixpairw.py ./gui/ui/qtsixa_sixpairw.ui
+	pyrcc5 -o ./gui/qtsixa_rc.py ./icons/qtsixa.qrc
 
 clean:
 	rm -f *~ gui/*~ gui/*.pyc gui/ui_*.py gui/qtsixa_rc.py
