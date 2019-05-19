@@ -61,9 +61,9 @@ echo "$ROOT"
 
     *)
 if [ -f ./gui/main.py ]; then
-  exec python ./gui/main.py "$@"
+  exec python2 ./gui/main.py "$@"
 else
-  exec python /usr/share/qtsixa/gui/main.py "$@"
+  exec python2 /usr/share/qtsixa/gui/main.py "$@"
 fi
     ;;
 esac

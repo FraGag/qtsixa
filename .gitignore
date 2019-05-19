@@ -4,6 +4,7 @@
 *.o
 *.a
 *.pro.user
+*.pyc
 
 qtsixa/gui/qtsixa_rc.py
 qtsixa/gui/ui_*.py
